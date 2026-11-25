@@ -1,53 +1,53 @@
-# Частичные отгрузки в B2B-портале заказов
+# Partial shipments in a B2B ordering portal
 
-Покупатель заказал 10 насосов. Склад отгрузил 6, остальные 4 поедут другой машиной. Наутро в личном кабинете по-прежнему видно «Открыт». Покупатель звонит менеджеру с двумя разными вопросами. Выехало ли хоть что-нибудь? Сколько насосов ещё не отгрузили?
+A customer ordered 10 pumps. The warehouse shipped 6; the other 4 will go on another truck. The next morning the customer's account still shows “Open”. The customer calls the account manager with two different questions. Has anything shipped at all? How many pumps have not shipped yet?
 
-Это вымышленная поставка портала для оптовых покупателей. Все документы, наблюдения, даты и оценки созданы для разбора. Цель владельца продукта — сократить число обращений об остатке к отгрузке. Проверить эффект он сможет после запуска, сопоставив число таких обращений на 100 заказов с частичными отгрузками до и после изменения.
+This is a fictional delivery of a portal for wholesale customers. All documents, observations, dates and estimates were created for the walkthrough. The product owner's goal is to reduce the number of enquiries about remaining quantities. They will be able to check the effect after launch by comparing the number of such enquiries per 100 partially shipped orders before and after the change.
 
-## 1. Восстановить исходное обязательство
+## 1. Reconstruct the original commitment
 
-5 октября 2026 года владелец продукта согласовал **Т-01, редакцию 1**. В карточке заказа покупатель видит учётный статус «Открыт» или «Закрыт». Источник — признак закрытия в учётной системе. Руководитель проекта зафиксировал базовый план с приёмкой 16 октября. На следующий день отдел продаж попросил добавить статус «Частично отгружен». Представитель склада уточнил, что документ отгрузки может прийти повторно, а заказ иногда закрывают в учёте позднее фактической отгрузки.
+On 5 October 2026 the product owner approved **R-01, version 1**. On the order card the customer sees the accounting status “Open” or “Closed”. The source is the closed flag in the accounting system. The project manager fixed a baseline with acceptance on 16 October. The next day sales asked for a “Partially shipped” status. The warehouse representative pointed out that a shipment document can arrive twice, and that an order is sometimes closed in accounting later than the physical shipment.
 
-Бизнес-аналитик сохранил пожелание и комментарий рядом с утверждённой редакцией. Для владельца продукта он сформулировал вопрос выбора: достаточно сообщить о начале отгрузки или покупатель должен видеть отгруженное количество и остаток по каждой позиции? Из прежнего поля нельзя достоверно получить ни одно из этих значений. [Исходные материалы И-01 и И-02](okf/intake.md)
+The business analyst kept the request and the comment next to the approved version. For the product owner, the analyst framed the choice: is it enough to say that shipping has started, or should the customer see the shipped quantity and the remainder for every line? Neither value can be reliably derived from the existing field. [Source records I-01 and I-02](okf/intake.md)
 
-## 2. Проверить архитектурный риск
+## 2. Test the architectural risk
 
-На этапе проработки RUP архитектор со специалистом склада воспроизвели обмен на стенде. В журнале проведённых отгрузок есть заказ, строка заказа, номер отгрузки и количество. Повтор сообщения сохраняет номер отгрузки и строку. В тестовом заказе сначала пришла запись на 6 единиц, затем та же запись ещё раз и новая запись на 4. Простое суммирование дало 16. Прототип учёл каждую пару «номер отгрузки + строка заказа» один раз и получил 10. Эти правила действуют для проведённых неизменяемых записей в рамках одного склада и заказа. Сторно и исправления требуют отдельного правила.
+During the RUP elaboration phase, the architect and a warehouse specialist reproduced the exchange on the test bench. The log of posted shipments contains the order, the order line, the shipment number and the quantity. A repeated message keeps the shipment number and the line. In the test order, a record for 6 units arrived first, then the same record again, then a new record for 4. A simple sum gave 16. The prototype counted each “shipment number + order line” pair once and got 10. These rules hold for posted immutable records within one warehouse and order. Reversals and corrections need a separate rule.
 
-Архитектор представил два варианта. **А. Факт первой отгрузки.** Показать отметку на заказе после первого проведённого документа. Покупатель узнает, что отгрузка началась, а за точным остатком ему придётся обратиться к менеджеру. **Б. Количество по позициям.** Хранить уникальные строки отгрузок, сопоставлять их со строками заказа и выводить отгруженное количество и остаток. Оба варианта требуют доступа к журналу. Опытный образец подтвердил структуру данных на стенде. Включение обмена в сборку и сквозная проверка остались в плане. [Наблюдения О-01](okf/prototype.md)
+The architect presented two options. **A. First-shipment fact.** Show a marker on the order after the first posted document. The customer learns that shipping has started but has to ask the account manager for the exact remainder. **B. Quantities per line.** Store unique shipment lines, match them to order lines and show the shipped quantity and the remainder. Both options need access to the log. The prototype confirmed the data structure on the test bench. Bringing the exchange into the build and the end-to-end test remained in the plan. [Observations E-01](okf/prototype.md)
 
-## 3. Принять решение о содержании и обязательствах
+## 3. Decide on scope and commitments
 
-7 октября владелец продукта выбрал **Б**. После проведённой отгрузки по позиции из 10 штук портал должен показать «Отгружено 6, осталось 4». Состояние всего заказа — «Частично отгружен». После отгрузки всех позиций целиком — «Отгружен». До первой отгрузки — «Ожидает отгрузки». Учётный статус остаётся отдельным полем. Дату следующей машины, возвраты, сторно и отмены в эту поставку не включили. Отдельную просьбу отдела продаж обещать дату следующей отгрузки аналитик оставил открытой.
+On 7 October the product owner chose **B**. After a posted shipment on a line of 10 units, the portal must show “Shipped 6, remaining 4”. The state of the whole order is “Partially shipped”. After all lines have shipped in full, “Shipped”. Before the first shipment, “Awaiting shipment”. The accounting status remains a separate field. The date of the next truck, returns, reversals and cancellations were left out of this delivery. The analyst kept the separate sales request to promise the next shipment date as an open item.
 
-Руководитель проекта предъявил расчёт ниже. Спонсор, отвечающий за бюджет и срок, согласовал прибавку 3 000 евро к бюджету труда и приёмку 21 октября. После обоих согласований аналитик выпустил **Т-01, редакцию 2** со ссылкой на **Р-01**. Архитектор связал правило учёта повторов с этой редакцией. Пакеты работ и проверки получили то же основание. [Решение Р-01](okf/decision.md) · [Действующее требование Т-01](okf/requirement.md)
+The project manager presented the calculation below. The sponsor, who is responsible for budget and date, approved an extra 3,000 euros in the labour budget and acceptance on 21 October. After both approvals the analyst issued **R-01, version 2**, referencing **D-01**. The architect linked the de-duplication rule to this version. The work packages and tests got the same basis. [Decision D-01](okf/decision.md) · [Requirement R-01 in force](okf/requirement.md)
 
-## 4. Пересчитать работы, календарь и стоимость
+## 4. Recalculate work, schedule and cost
 
-Результат верхнего уровня WBS — принятая карточка заказа. Руководитель проекта и исполнители выделили четыре пакета. **1.1** даёт согласованный сценарий и проверенную модель обмена (A, B). **1.2** — экран покупателя (C). **1.3** — данные и расчёт состояния для этого экрана (D). **1.4** — проверенную сборку и протокол приёмки (E, F). Для варианта Б в 1.2 добавились количества по позициям, в 1.3 — чтение строк отгрузки и защита от повторного учёта, в 1.4 — дополнительные проверки. Владелец каждого пакета подтвердил оставшуюся оценку.
+The top-level WBS deliverable is an accepted order card. The project manager and the assignees identified four packages. **1.1** delivers an agreed scenario and a verified exchange model (A, B). **1.2**, the customer screen (C). **1.3**, the data and the state calculation for that screen (D). **1.4**, a tested build and the acceptance record (E, F). For option B, 1.2 gained per-line quantities, 1.3 gained reading shipment lines and protection against double counting, and 1.4 gained additional tests. The owner of each package confirmed the remaining estimate.
 
-Рабочие дни — понедельник–пятница. Каждая операция занимает одного исполнителя на полный день. Экран и обмен делают разные специалисты. Следующая операция начинается в рабочий день после завершения всех предшественников. Таблица показывает полную длительность операций, включая выполненную к 7 октября работу. Все даты — октябрь 2026 года.
+Working days are Monday to Friday. Each activity takes one assignee full time. The screen and the exchange are built by different people. The next activity starts on the working day after all predecessors finish. The table shows the full duration of activities, including work done by 7 October. All dates are in October 2026.
 
-| Работа | После | Длительность до → после, раб. дни | Исходный план | По Р-01 |
+| Activity | After | Duration before → after, working days | Original plan | Per D-01 |
 |---|---|---:|---|---|
-| A. Согласовать исходный сценарий | — | 1 → 1 | 5 | 5 |
-| B. Проверить доступные данные на стенде | A | 2 → 2 | 6–7 | 6–7 |
-| C. Подготовить экран покупателя | A | 3 → 6 | 6–8 | 6–13 |
-| D. Реализовать получение и расчёт данных | B | 4 → 6 | 8–13 | 8–15 |
-| E. Собрать версию и проверить сценарии | C, D | 2 → 3 | 14–15 | 16–20 |
-| F. Предъявить версию владельцу продукта | E | 1 → 1 | 16 | 21 |
+| A. Agree the original scenario | — | 1 → 1 | 5 | 5 |
+| B. Check the available data on the test bench | A | 2 → 2 | 6–7 | 6–7 |
+| C. Build the customer screen | A | 3 → 6 | 6–8 | 6–13 |
+| D. Implement data loading and calculation | B | 4 → 6 | 8–13 | 8–15 |
+| E. Build the release and test the scenarios | C, D | 2 → 3 | 14–15 | 16–20 |
+| F. Present the release to the product owner | E | 1 → 1 | 16 | 21 |
 
-**Итог для спонсора.** Трудоёмкость выросла с 13 до 19 человеко-дней. При внутренней ставке 500 евро за человеко-день затраты труда выросли с 6 500 до 9 500 евро. Критический путь A–B–D–E–F вырос с 10 до 13 рабочих дней. Экран готов 13 октября и имеет два рабочих дня резерва до завершения D. Поэтому дополнительные шесть человеко-дней сдвигают приёмку на три рабочих дня. До утверждения Р-01 дата приёмки «21 октября» оставалась прогнозом. По решению спонсора от 7 октября она вошла в обновлённый базовый план.
+**Summary for the sponsor.** Effort grew from 13 to 19 person-days. At an internal rate of 500 euros per person-day, labour cost grew from 6,500 to 9,500 euros. The critical path A–B–D–E–F grew from 10 to 13 working days. The screen is ready on 13 October and has two working days of float before D finishes. That is why six extra person-days move acceptance by three working days. Until D-01 was approved, “21 October” was a forecast. With the sponsor's decision of 7 October it entered the updated baseline.
 
-## 5. Предъявить результат и восстановить основание
+## 5. Present the result and trace back its basis
 
-Специалист по тестированию проверил сборку **b17** на стенде интеграции. В каждом сценарии он дождался обработки входных документов, обновил карточку покупателя и записал полученные значения. В П-01–П-03 использован заказ с одной позицией из 10 штук. П-04 начинается с отдельного заказа. Все наблюдения ниже — часть учебного примера.
+The tester checked build **b17** on the integration test bench. In each scenario the tester waited for the input documents to be processed, refreshed the customer's card and recorded the values shown. T-01 to T-03 use an order with one line for 10 units. T-04 starts with a separate order. All observations below are part of the training example.
 
-| Проверка | Ожидание по Т-01, ред. 2 | Что увидел проверяющий |
+| Check | Expected per R-01, v. 2 | What the tester saw |
 |---|---|---|
-| П-01. До отгрузки, затем документ на 6 | Сначала 0/10 и «Ожидает отгрузки», затем 6/4 и «Частично отгружен». Первое число — отгружено, второе — осталось | После обновления карточки обе пары чисел и оба состояния совпали с ожиданием |
-| П-02. Повтор того же документа на 6 | По позиции по-прежнему 6/4, состояние заказа не меняется | Журнал зафиксировал повторную доставку. На экране осталось 6/4 и «Частично отгружен» |
-| П-03. Новый документ на оставшиеся 4 | По позиции 10/0, «Отгружен». Если учётное закрытие ещё не пришло, поле учётного статуса остаётся «Открыт» | Оба состояния видны одновременно, в строке заказа 10/0 |
-| П-04. Один документ содержит по строке для двух позиций, заказано 2 и 3, отгружено 2 и 1 | Позиции показывают 2/0 и 1/2. Весь заказ «Частично отгружен» | Обе строки одного документа учтены, состояние заказа совпало с ожиданием |
+| T-01. Before shipment, then a document for 6 | First 0/10 and “Awaiting shipment”, then 6/4 and “Partially shipped”. The first number is shipped, the second is remaining | After refreshing the card, both pairs of numbers and both states matched the expectation |
+| T-02. Repeat of the same document for 6 | The line still shows 6/4; the order state does not change | The log recorded the repeated delivery. The screen still showed 6/4 and “Partially shipped” |
+| T-03. New document for the remaining 4 | The line shows 10/0, “Shipped”. If the accounting closure has not arrived yet, the accounting status stays “Open” | Both states are visible at once; the order line shows 10/0 |
+| T-04. One document has lines for two order lines; ordered 2 and 3, shipped 2 and 1 | Lines show 2/0 and 1/2. The whole order is “Partially shipped” | Both lines of the one document were counted; the order state matched the expectation |
 
-21 октября владелец продукта сверил результаты с редакцией 2 и принял поставку в **А-01**. По П-02 можно пройти назад от наблюдения «6/4 после повтора» к критерию Т-01, защите от повторов в пакете 1.3 и стендовому наблюдению О-01. Р-01 показывает, кто включил эту работу в поставку и принял последствия для бюджета и даты. [Наблюдения П-01–П-04](okf/observations.md) · [Акт А-01](okf/acceptance.md)
+On 21 October the product owner checked the results against version 2 and accepted the delivery in **A-01**. From T-02 you can go back from the observation “6/4 after the repeat” to the criterion in R-01, the de-duplication in package 1.3 and the test-bench observation E-01. D-01 shows who put this work into the delivery and accepted the consequences for budget and date. [Observations T-01–T-04](okf/observations.md) · [Record A-01](okf/acceptance.md)

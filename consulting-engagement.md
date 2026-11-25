@@ -1,33 +1,41 @@
-# От запроса до приёмки изменения
+# From request to acceptance of a change
 
-Консультационная практика Александра Поломодова
+Consulting practice of Alexander Polomodov
 
-Если согласованную задачу приходится возвращать из разработки, стоит разобрать конкретный случай. Когда стало ясно, что участники по-разному понимают ожидаемый результат? Можно ли было обнаружить это до разработки? Предлагаю вместе с командой проследить путь одного изменения от запроса до приёмки, а затем проверить новый порядок работы на следующем изменении.
+If agreed work keeps coming back from development, it is worth taking one specific case apart. When did it become clear that participants understood the expected result differently? Could this have been spotted before development? I propose to trace one change with the team from request to acceptance, and then test the new way of working on the next change.
 
-Для управленческих решений опираюсь на подходы Project Management Institute (PMI) к работе с участниками проекта и рисками. Из Rational Unified Process (RUP) беру планирование итерации вокруг существенного риска. Связующим звеном служит требование, которое можно проверить. Оно объясняет архитектору, какие варианты решения допустимы, а заказчику даёт основание принять результат. [Принципы управления проектами PMI](https://www.pmi.org/-/media/pmi/documents/public/pdf/pmbok-standards/12-project-management-principles.pdf) · [Планирование проекта по RUP, IBM Rational](https://public.dhe.ibm.com/software/rational/web/whitepapers/2003/tp151.pdf)
+For management decisions I rely on the Project Management Institute (PMI) approaches to stakeholders and risk. From the Rational Unified Process (RUP) I take iteration planning around a material risk. The link between them is a requirement that can be verified. It tells the architect which solution options are acceptable and gives the customer a basis for accepting the result. [PMI project management principles](https://www.pmi.org/-/media/pmi/documents/public/pdf/pmbok-standards/12-project-management-principles.pdf) · [Project planning with RUP, IBM Rational](https://public.dhe.ibm.com/software/rational/web/whitepapers/2003/tp151.pdf)
 
-## Что можно заказать
+## What you can order
 
-| Задача | Что получит команда | Когда работа завершена |
+| Engagement | What the team gets | When the work is done |
 | --- | --- | --- |
-| Диагностика одного изменения | Схема фактического хода работ с местами ожидания и возвратов | Участники подтвердили ход событий по рабочим материалам и выбрали проблему для проверки |
-| Проработка требования и архитектурного решения | Сценарий, критерии приёмки, запись о выборе решения и план проверки риска | Представитель заказчика согласовал ожидаемый результат, технический руководитель определил способ проверки |
-| Сопровождение пилота и передача практики | Пример принятого решения с результатом проверки, рабочие шаблоны и сравнение с исходным случаем | Команда самостоятельно разобрала следующее изменение и решила, какие приёмы сохранить |
+| Diagnosis of one change | A map of how the work actually went, with waits and rework loops | Participants have confirmed the sequence of events from working materials and chosen a problem to test |
+| Requirement and architecture work-through | A scenario, acceptance criteria, a decision record and a plan for testing the risk | The customer's representative has agreed the expected result and the technical lead has defined how to test it |
+| Pilot support and hand-over of the practice | An example of an accepted decision with its test result, working templates and a comparison with the original case | The team has worked through the next change on its own and decided which techniques to keep |
 
-## С чего начинается разбор
+## How the review starts
 
-- Кто запросил изменение, для кого и какой результат считал достаточным?
-- В какой момент потребовалось уточнение? Кто мог ответить и что команда делала в ожидании?
-- Какое предположение повлияло на выбор архитектуры? Во что обойдётся пересмотр решения, если предположение окажется неверным?
-- По каким данным заказчик принимал работу? Совпали ли они с тем, что проверяла команда?
+- Who requested the change, for whom, and what result did they consider sufficient?
+- At what point was clarification needed? Who could answer, and what did the team do while waiting?
+- Which assumption influenced the choice of architecture? What would revisiting the decision cost if the assumption turns out to be wrong?
+- What did the customer base acceptance on? Did it match what the team tested?
 
-Для начала заказчик выбирает завершённое изменение и показывает постановку задачи, запись о решении и результаты проверки. Если решение осталось устным, восстановим его с участниками и отметим, что удалось подтвердить. Для пилота выбираем сопоставимое предстоящее изменение. В работе участвуют представитель заказчика с правом принять результат и специалисты, которые будут проектировать, реализовывать и проверять решение.
+To start, the customer picks a completed change and shows the task statement, the decision record and the test results. If the decision was only verbal, we reconstruct it with the participants and note what could be confirmed. For the pilot we pick a comparable upcoming change. Participants include a customer representative with the right to accept the result and the specialists who will design, build and test the solution.
 
-## Как проходит пилот
+## How the pilot runs
 
-1. Вместе с руководителем проекта выбираем границы пилота, исходный случай и признак улучшения. Фиксируем, кто примет решение при изменении объёма работ.
-2. Представитель заказчика описывает рабочий сценарий. Аналитик и специалист по тестированию переводят его в условие приёмки с наблюдаемым результатом. Архитектор показывает, какое ограничение влияет на выбор решения, и записывает основание выбора.
-3. Команда проверяет риск в итерации. В примере с частичными отгрузками архитектор воспроизводит повтор одного складского документа, а аналитик сверяет, что покупатель видит после него. Я помогаю руководителю проекта связать результат опыта с оценкой работ. Владелец продукта выбирает поведение, спонсор принимает последствия для срока и бюджета.
-4. На разборе пилота сопоставляем исходный и новый случаи по заранее выбранной мере. Например, считаем возвраты задачи на уточнение после начала разработки и сверяем причины по истории задачи. Отдельно отмечаем различия в сложности и составе команды, которые могли повлиять на сравнение.
+1. With the project manager we choose the pilot boundaries, the baseline case and the sign of improvement. We record who will decide if the scope changes.
+2. The customer's representative describes the working scenario. The analyst and the tester turn it into an acceptance condition with an observable result. The architect shows which constraint drives the choice of solution and records the basis for the choice.
+3. The team tests the risk in an iteration. In the partial shipments example, the architect reproduces a repeat of one warehouse document and the analyst checks what the customer sees after it. I help the project manager connect the experiment's result to the work estimate. The product owner chooses the behaviour; the sponsor accepts the consequences for date and budget.
+4. At the pilot review we compare the baseline and the new case on a measure chosen in advance. For example, we count how often a task went back for clarification after development started and check the reasons in the task history. We separately note differences in complexity and team composition that could have affected the comparison.
 
-На следующем изменении разбор ведёт сотрудник заказчика. Я передаю ему заполненный пример, карточки контекста, три инструкции для агентов и шесть проверочных заданий. Мы разбираем ответ, в котором правильное арифметическое ожидание может скрывать недостающее свидетельство приёмки. Передачу можно считать завершённой, когда сотрудники самостоятельно выдают задание, замечают такую ошибку и знают, у кого запросить свидетельство или решение. [Пример поставки](example.md) · [Практикум для команды](agent-practice.md)
+On the next change, a member of the customer's staff leads the review. I hand over a completed example, context cards, three agent instructions and six test tasks. We go through an answer in which a correct arithmetic expectation can hide missing acceptance evidence. The hand-over is complete when the staff issue the task on their own, spot such an error and know whom to ask for the evidence or the decision. [Example delivery](example.md) · [Team workshop](agent-practice.md)
+
+## About the author
+
+Alexander Polomodov is an engineering leader and consultant based in London. He works with engineering and product teams on how requirements, architecture decisions, plans and acceptance stay connected, and on bringing AI agents into that work with measurable checks. More talks, articles and podcasts are on [polomodov.tech](https://polomodov.tech).
+
+**Get in touch:** [alex@polomodov.tech](mailto:alex@polomodov.tech) · [LinkedIn](https://www.linkedin.com/in/alexanderpolomodov/) · [Telegram](https://t.me/apolomodov). Sessions run remotely or on site, in English or Russian.
+
+Engagements are subject to applicable sanctions and export-control law. I don't work with sanctioned persons or with organisations where such work is restricted.

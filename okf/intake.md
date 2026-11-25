@@ -1,22 +1,22 @@
 ---
 type: Source
-title: И-01 и И-02. Обязательство и запрос продаж
+title: I-01 and I-02. Commitment and the sales request
 status: stable
 sources: []
 ---
 
-# И-01. Выписка из согласования 5 октября 2026 года
+# I-01. Extract from the approval of 5 October 2026
 
-**Т-01, редакция 1.** Владелец продукта согласовал для ближайшей поставки поле «Учётный статус» в карточке заказа покупателя. Портал показывает «Открыт» при снятом признаке закрытия и «Закрыт» при установленном. Действующий обмен передаёт номер заказа и признак закрытия. В нём нет строк проведённых отгрузок и количеств по ним.
+**R-01, version 1.** For the next delivery, the product owner approved an “Accounting status” field on the customer's order card. The portal shows “Open” when the closed flag is not set and “Closed” when it is set. The current exchange transmits the order number and the closed flag. It has no posted shipment lines and no quantities for them.
 
-**Приёмка и полномочия.** Руководитель проекта зафиксировал в базовом плане приёмку 16 октября 2026 года и бюджет труда 6 500 евро. Владелец продукта определяет поведение портала и принимает сборку. Спонсор утверждает изменение бюджета и даты приёмки. Архитектор проверяет техническую реализуемость, руководитель проекта готовит оценку.
+**Acceptance and authority.** The project manager fixed acceptance on 16 October 2026 and a labour budget of 6,500 euros in the baseline plan. The product owner defines the portal's behaviour and accepts the build. The sponsor approves changes to the budget and the acceptance date. The architect checks technical feasibility; the project manager prepares the estimate.
 
-# И-02. Рабочие записи бизнес-аналитика 6 октября 2026 года
+# I-02. Business analyst's working notes, 6 October 2026
 
-| Участник | Записанная реплика |
+| Participant | Recorded remark |
 |---|---|
-| Представитель продаж | «Покупатель заказал 10 насосов. Шесть уже выехали, а он по-прежнему видит “Открыт”. Пишет менеджеру, выехало ли хоть что-нибудь и сколько осталось. Давайте покажем “Частично отгружен”». |
-| Представитель склада | «Заказ бывает открыт в учёте и после отгрузки последней машины. Документ отгрузки иногда отправляем повторно». |
-| Представитель продаж | «Ещё хорошо бы писать, когда приедет следующая машина». |
+| Sales representative | “The customer ordered 10 pumps. Six have already left, and they still see ‘Open’. They write to their account manager asking whether anything has shipped and how much is left. Let's show ‘Partially shipped’.” |
+| Warehouse representative | “An order can stay open in accounting even after the last truck has left. We sometimes resend the shipment document.” |
+| Sales representative | “It would also be good to say when the next truck will arrive.” |
 
-Аналитик записал два открытых вопроса. Какую информацию покупатель должен получить без звонка менеджеру? Какие данные о состоявшейся отгрузке можно получить отдельно от признака закрытия? На встрече 6 октября участники не согласовывали изменение Т-01, срока и бюджета.
+The analyst recorded two open questions. What information should the customer get without calling the account manager? What data about a completed shipment can be obtained separately from the closed flag? At the 6 October meeting the participants did not approve any change to R-01, the date or the budget.

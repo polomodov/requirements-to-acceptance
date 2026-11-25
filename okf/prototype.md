@@ -1,36 +1,36 @@
 ---
 type: Experiment
-title: О-01. Опыт на стенде и оценки работ
+title: E-01. Test-bench experiment and work estimates
 status: stable
 sources:
   - resource: intake.md
 ---
 
-# О-01. Журнал опыта 7 октября 2026 года
+# E-01. Experiment log, 7 October 2026
 
-**Вопрос архитектора.** Можно ли по журналу склада отличить две отгрузки от двух доставок одного документа? Основание для проверки — слова представителя склада. [И-02](intake.md)
+**The architect's question.** Can the warehouse log distinguish two shipments from two deliveries of the same document? The reason for the check is the warehouse representative's remark. [I-02](intake.md)
 
-**Условия.** Архитектор и представитель склада открыли журнал проведённых неизменяемых записей одного склада. В заказе Z-70 одна строка L1, заказано 10 насосов. Ниже указаны три доставки одного и того же заказа. Номер документа отгрузки и строка заказа — поля полезной нагрузки, номер доставки — идентификатор записи в журнале обмена.
+**Conditions.** The architect and the warehouse representative opened the log of posted, immutable records for one warehouse. Order Z-70 has one line, L1, for 10 pumps. Below are three deliveries for the same order. The shipment document number and the order line are payload fields; the delivery number is the record ID in the exchange log.
 
-| Доставка | Документ отгрузки | Строка заказа | Количество | Проведён |
+| Delivery | Shipment document | Order line | Quantity | Posted |
 |---|---|---|---:|---|
-| E-101 | S-81 | L1 | 6 | Да |
-| E-102 | S-81 | L1 | 6 | Да |
-| E-103 | S-83 | L1 | 4 | Да |
+| E-101 | S-81 | L1 | 6 | Yes |
+| E-102 | S-81 | L1 | 6 | Yes |
+| E-103 | S-83 | L1 | 4 | Yes |
 
-**Наблюдение.** Сумма трёх сообщений равна 16. После учёта каждой пары «документ отгрузки + строка заказа» один раз прототип получил последовательно 6, 6, 10. Граница такого ключа в опыте — один склад и один заказ. Архитектор подтвердил наличие нужных полей на стенде. Сторно, исправления и обмен в составе поставляемой сборки в этот опыт не входили.
+**Observation.** The sum of the three messages is 16. Counting each “shipment document + order line” pair once, the prototype produced 6, 6, 10 in turn. The boundary of this key in the experiment is one warehouse and one order. The architect confirmed the required fields exist on the test bench. Reversals, corrections and the exchange inside the delivered build were not part of this experiment.
 
-## Лист оценки для совещания 7 октября
+## Estimate sheet for the 7 October meeting
 
-Руководитель проекта собрал оценки исполнителей для варианта Б — загрузить количества и показать остаток по каждой позиции. Вариант А предполагает только отметку о первом проведённом документе. Оба варианта требуют подключения к журналу. Численная оценка ниже относится к исходному плану и варианту Б.
+The project manager collected the assignees' estimates for option B: load quantities and show the remainder for each line. Option A only adds a marker for the first posted document. Both options require a connection to the log. The figures below cover the original plan and option B.
 
-| Пакет и операция | Исполнитель | После | Полная длительность в базовом плане, раб. дни | Полная длительность по варианту Б, раб. дни |
+| Package and activity | Assignee | After | Full duration in baseline, working days | Full duration with option B, working days |
 |---|---|---|---:|---:|
-| 1.1 / A. Согласовать сценарий | Бизнес-аналитик | — | 1 | 1 |
-| 1.1 / B. Проверить данные на стенде | Архитектор | A | 2 | 2 |
-| 1.2 / C. Подготовить экран | Разработчик портала | A | 3 | 6 |
-| 1.3 / D. Получить данные и рассчитать состояние | Разработчик интеграции | B | 4 | 6 |
-| 1.4 / E. Собрать версию и проверить сценарии | Специалист по тестированию | C, D | 2 | 3 |
-| 1.4 / F. Предъявить версию | Руководитель проекта | E | 1 | 1 |
+| 1.1 / A. Agree the scenario | Business analyst | — | 1 | 1 |
+| 1.1 / B. Check the data on the test bench | Architect | A | 2 | 2 |
+| 1.2 / C. Build the screen | Portal developer | A | 3 | 6 |
+| 1.3 / D. Load data and calculate the state | Integration developer | B | 4 | 6 |
+| 1.4 / E. Build the release and test the scenarios | Tester | C, D | 2 | 3 |
+| 1.4 / F. Present the release | Project manager | E | 1 | 1 |
 
-Отсчёт с 5 октября 2026 года, рабочие дни с понедельника по пятницу. Каждая операция занимает одного исполнителя на полный день. C и D выполняют разные специалисты. Следующая операция начинается в ближайший рабочий день после окончания всех предшественников. Оценки включают выполненную к дате совещания работу. Ставка для расчёта затрат на труд — 500 евро за человеко-день. На момент составления листа выбор варианта и изменение базового плана открыты.
+Counting from 5 October 2026, working days Monday to Friday. Each activity takes one assignee full time. C and D are done by different people. The next activity starts on the first working day after all its predecessors finish. The estimates include work already done by the date of the meeting. The rate for labour cost is 500 euros per person-day. When the sheet was prepared, the choice of option and the change to the baseline were still open.

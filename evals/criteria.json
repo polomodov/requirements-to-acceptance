@@ -1,26 +1,26 @@
 {
   "REQ-1": {
     "expected": {"decision":"open", "approved_view":null, "decision_source":null, "has_line_quantities":false},
-    "review": "Проверьте, что автор различает просьбы S2 и S3, видит ограничение S4 для обоих вариантов и предлагает владельцу продукта принять решение по процедуре S1. Пустой журнал S5 и свежесть S3 сами по себе не определяют состав релиза."
+    "review": "Check that the author distinguishes the requests S2 and S3, sees that the S4 limitation applies to both options and proposes that the product owner decide under procedure S1. The empty log S5 and the recency of S3 do not by themselves determine the release scope."
   },
   "REQ-2": {
     "expected": {"decision":"approved", "approved_view":"first_shipment", "decision_source":"M3", "has_line_quantities":true},
-    "review": "В выводе разделены возможности контракта M2 и согласованный объём M3. Предложен способ разобрать более позднюю просьбу M4, не приписывая владельцу её одобрение."
+    "review": "The conclusion separates what contract M2 makes possible from the scope approved in M3. It proposes a way to handle the later request M4 without attributing its approval to the owner."
   },
   "PLAN-1": {
     "expected": {"baseline_days":8, "forecast_days":8, "forecast_floor_days":8, "effort_delta_pd":2, "cost_delta_units":200, "committed_days":8},
-    "review": "Показана зависимость A → (B, C) → D. Согласно P1 и P2 ветка B удлиняется с двух до четырёх дней, оставаясь короче пятидневной C. Названы затронутый адаптер, последующая проверка и основание статуса плана P3."
+    "review": "The dependency A → (B, C) → D is shown. Per P1 and P2 branch B grows from two to four days and stays shorter than the five-day C. The affected adapter, the downstream test and the plan status basis P3 are named."
   },
   "PLAN-2": {
     "expected": {"baseline_days":8, "forecast_days":null, "forecast_floor_days":10, "effort_delta_pd":null, "cost_delta_units":null, "committed_days":8},
-    "review": "Десять дней выведены по известной ветке A → C → D как нижняя граница. Указано, как получить оценку B по Q2 и пересчитать максимум параллельных веток. Видно, что Q3 сохраняет утверждённый срок."
+    "review": "Ten days are derived from the known branch A → C → D as a lower bound. The answer says how to get the B estimate per Q2 and recompute the maximum of the parallel branches. It is clear that Q3 keeps the approved date."
   },
   "ACC-1": {
     "expected": {"shipped_after":[6,6,10], "remaining_after":[4,4,0], "test_result":"incomplete", "product_decision":"pending", "decision_source":null},
-    "review": "По T1 и T2 повтор не меняет количество. Автор отделяет расчёт для H2 от фактических наблюдений T3 и предлагает получить недостающее свидетельство. Сообщение разработчика по T4 не служит решением о приёмке."
+    "review": "Per T1 and T2 the repeat does not change the quantity. The author separates the calculation for H2 from the actual observations in T3 and proposes obtaining the missing evidence. The developer's message in T4 is not an acceptance decision."
   },
   "ACC-2": {
     "expected": {"shipped_after":[3,8,8], "remaining_after":[5,0,0], "test_result":"passed", "product_decision":"accepted", "decision_source":"U5"},
-    "review": "Поздний повтор распознан по ID отправления. Протокол U3 подтверждает поведение одной сборки для описанного заказа. Отдельно указаны полномочия U4 и фактическое решение U5."
+    "review": "The late repeat is recognised by the shipment ID. Log U3 confirms the behaviour of one build for the described order. The authority U4 and the actual decision U5 are stated separately."
   }
 }

@@ -1,28 +1,28 @@
 ---
 type: Decision
-title: Р-01. Объём частичных отгрузок и изменение плана
+title: D-01. Partial shipment scope and plan change
 status: stable
 sources:
   - resource: intake.md
   - resource: prototype.md
 ---
 
-# Р-01. Протокол решения 7 октября 2026 года
+# D-01. Decision record, 7 October 2026
 
-**Предмет.** Учётный статус из Т-01, редакции 1, остаётся в карточке заказа. Команда рассмотрела два способа сообщить покупателю о ходе отгрузки. Проверка полей журнала и оценки операций приложены к решению. [И-01 и И-02](intake.md) · [О-01 и лист оценки](prototype.md)
+**Subject.** The accounting status from R-01, version 1, stays on the order card. The team considered two ways to tell the customer how shipping is going. The log field check and the activity estimates are attached to the decision. [I-01 and I-02](intake.md) · [E-01 and the estimate sheet](prototype.md)
 
-| Вариант | Что видит покупатель после отгрузки 6 из 10 | Вывод владельца продукта |
+| Option | What the customer sees after 6 of 10 have shipped | Product owner's conclusion |
 |---|---|---|
-| А. Отметка о первой отгрузке | Видит, что отгрузка началась. За остатком обращается к менеджеру. | Общая отметка оставляет второй вопрос покупателя открытым. |
-| Б. Количество по позициям | По строке заказа видит 6 отгруженных и остаток 4. По заказу видит состояние отгрузки. | Вариант покрывает оба обращения и позволяет проверить ответ по каждой позиции. |
+| A. First-shipment marker | Sees that shipping has started. Asks the account manager for the remainder. | A general marker leaves the customer's second question open. |
+| B. Quantities per line | On the order line sees 6 shipped and 4 remaining. On the order sees the shipping state. | The option answers both enquiries and lets each line be checked. |
 
-**Согласование содержания.** Владелец продукта 7 октября выбрал Б для этой поставки. В объём входят проведённые неизменяемые строки отгрузки одного склада, повторная доставка, количества по позициям и общее состояние отгрузки. Дата следующей машины остаётся открытой просьбой продаж. Возвраты, сторно и отмены вынесены за границу поставки.
+**Scope approval.** On 7 October the product owner chose B for this delivery. In scope: posted, immutable shipment lines from one warehouse, repeated delivery, quantities per line and the overall shipping state. The date of the next truck remains an open request from sales. Returns, reversals and cancellations are outside the delivery.
 
-| Расчёт руководителя проекта | Базовый план до Р-01 | Вариант Б | Изменение |
+| Project manager's calculation | Baseline before D-01 | Option B | Change |
 |---|---:|---:|---:|
-| Трудоёмкость | 13 человеко-дней | 19 человеко-дней | +6 человеко-дней |
-| Бюджет труда | 6 500 евро | 9 500 евро | +3 000 евро |
-| Длина критического пути A–B–D–E–F | 10 рабочих дней | 13 рабочих дней | +3 рабочих дня |
-| Дата приёмки | 16 октября | 21 октября | +3 рабочих дня |
+| Effort | 13 person-days | 19 person-days | +6 person-days |
+| Labour budget | 6,500 euros | 9,500 euros | +3,000 euros |
+| Critical path A–B–D–E–F | 10 working days | 13 working days | +3 working days |
+| Acceptance date | 16 October | 21 October | +3 working days |
 
-**Согласование обязательств.** Спонсор 7 октября утвердил для варианта Б бюджет труда 9 500 евро и дату приёмки 21 октября 2026 года. С этого решения действует обновлённый базовый план. В нём C завершается 13 октября, D — 15 октября, E — 20 октября. Работы по экрану имеют два рабочих дня резерва до завершения D. Руководитель проекта отразил изменения в пакетах 1.2, 1.3 и 1.4. Бизнес-аналитик выпустил [Т-01, редакцию 2](requirement.md).
+**Approval of commitments.** On 7 October the sponsor approved, for option B, a labour budget of 9,500 euros and an acceptance date of 21 October 2026. The updated baseline is in force from this decision. In it C finishes on 13 October, D on 15 October and E on 20 October. The screen work has two working days of float before D finishes. The project manager reflected the changes in packages 1.2, 1.3 and 1.4. The business analyst issued [R-01, version 2](requirement.md).

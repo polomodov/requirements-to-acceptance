@@ -1,6 +1,6 @@
 ---
 type: Acceptance record
-title: А-01. Решение о приёмке сборки b17
+title: A-01. Acceptance decision for build b17
 status: stable
 sources:
   - resource: observations.md
@@ -8,6 +8,6 @@ sources:
   - resource: decision.md
 ---
 
-# А-01. Решение владельца продукта 21 октября 2026 года
+# A-01. Product owner's decision, 21 October 2026
 
-Владелец продукта сверил [наблюдения П-01–П-04](observations.md) с [Т-01, редакцией 2](requirement.md), и принял в сборке b17 карточку заказа с частичными отгрузками в согласованных границах. Основание решения — наблюдения на предъявленной сборке. Перечень включённых возможностей и исключений соответствует [Р-01](decision.md).
+The product owner compared [observations T-01–T-04](observations.md) with [R-01, version 2](requirement.md) and accepted the order card with partial shipments in build b17 within the agreed boundaries. The basis for the decision is the observations on the presented build. The list of included capabilities and exclusions matches [D-01](decision.md).

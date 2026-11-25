@@ -1,45 +1,47 @@
-# Как проверить три скилла на частичных отгрузках
+# How to test the three skills on partial shipments
 
-Шесть заданий воспроизводят решения аналитика, руководителя проекта и владельца продукта. Внутри каждой пары меняется существенное условие. Задача проверки — увидеть, меняет ли агент вывод вслед за источниками. Все входы вымышлены. Каждое задание использует собственные исходные данные и версии.
+The six tasks reproduce decisions made by the analyst, the project manager and the product owner. Within each pair a material condition changes. The point of the check is to see whether the agent changes its conclusion when the sources change. All inputs are fictional. Each task uses its own source data and versions.
 
-| Скилл | Задания | Что меняется |
+| Skill | Tasks | What changes |
 |---|---|---|
-| [Разобрать требование](../.agents/skills/clarify-requirement/SKILL.md) | REQ-1, REQ-2 | Состав передаваемых данных и наличие решения о первой версии |
-| [Оценить влияние изменения](../.agents/skills/trace-change-impact/SKILL.md) | PLAN-1, PLAN-2 | Оценка одной из двух параллельных работ известна либо ещё уточняется |
-| [Подготовить приёмку](../.agents/skills/prepare-acceptance/SKILL.md) | ACC-1, ACC-2 | Место повторного события в истории, полнота наблюдений и наличие акта |
+| [Clarify requirement](../.agents/skills/clarify-requirement/SKILL.md) | REQ-1, REQ-2 | Which data is transmitted, and whether there is a decision on the first release |
+| [Trace change impact](../.agents/skills/trace-change-impact/SKILL.md) | PLAN-1, PLAN-2 | Whether the estimate of one of two parallel activities is known or still being clarified |
+| [Prepare acceptance](../.agents/skills/prepare-acceptance/SKILL.md) | ACC-1, ACC-2 | Where the repeated event falls in the history, how complete the observations are, and whether there is an acceptance record |
 
-## Прогон
+## Run
 
-Из папки методологии выполните команду. Достаточно Python 3.7+ со стандартной библиотекой.
+Run the commands from the repository root. Python 3.7+ with the standard library is enough.
 
 ```sh
 python3 evals/run.py show > /tmp/shipment-tasks.json
 ```
 
-В новой сессии передайте исполнителю выгрузку и три файла скиллов. Оставьте ключ и материалы разбора у рецензента. Попросите вернуть один JSON по формату из выгрузки. Сохраните его как `/tmp/shipment-answers.json` и выполните проверку.
+In a new session, give the agent the export and the three skill files. Keep the key and the walkthrough materials with the reviewer. Ask for one JSON in the format from the export. Save it as `/tmp/shipment-answers.json` and grade it.
 
 ```sh
 python3 evals/run.py grade /tmp/shipment-answers.json
 ```
 
-Для отдельного испытания добавьте к **обеим** командам один и тот же параметр, например `--case PLAN-2`. Пропуск задания или обязательного поля приводит к провалу автоматической части. Код выхода 0 означает, что ответы совпадают по проверяемым полям, 1 обозначает расхождения, 2 — ошибку входа или команды. Выдача заданий читает только [исходные данные](tasks.json). Проверка обращается к [ключу и указаниям рецензенту](criteria.json).
+For a single task, add the same option to **both** commands, for example `--case PLAN-2`. A missing task or required field fails the automated part. Exit code 0 means the answers match on the checked fields, 1 means discrepancies, 2 means an input or command error. Issuing tasks reads only the [source data](tasks.json). Grading uses the [key and reviewer notes](criteria.json).
 
-## Разбор ответа
+The same tasks in Russian live in [`ru/evals/`](../ru/evals/README.md). Add `--lang ru` before the command (`python3 evals/run.py --lang ru show`) and give the agent the Russian skills from `ru/.agents/skills/`. The expected values are identical in both languages, so results are comparable.
 
-У каждого задания два результата. Скрипт сверяет типы, значения, порядок событий и наличие пояснения. Рецензент читает поле `note`, пользуясь критерием `review` из ключа. Для зачёта пояснения ответ должен пройти три проверки.
+## Reviewing an answer
 
-1. **Источники.** Значимые утверждения опираются на конкретные записи из задания. Автор различает слова участника, утверждённое решение и наблюдение системы.
-2. **Обоснование.** Коллега может по ответу проследить выбор варианта, расчёт или ход проверки. Утверждения согласуются со структурированными полями. Указаны допущения, от которых зависит результат.
-3. **Действие.** Адресату понятно, что он может сделать на основании ответа. Если не хватает решения, оценки или наблюдения, названы конкретный пробел и способ его закрыть.
+Each task has two results. The script checks types, values, the order of events and the presence of an explanation. The reviewer reads the `note` field using the `review` criterion from the key. To pass, the explanation must meet three checks.
 
-Если нарушен любой критерий, отметьте его и сохраните фразу, которая привела к оценке. Например, число отгруженных единиц может быть вычислено верно, но фраза «последнее событие успешно обработано» при отсутствующем наблюдении провалит ручную проверку. Для повторного прогона запишите дату, версию скилла и заданий, модель или исполнителя, полученные ответы, отдельно результаты скрипта и решения рецензента. Шесть заданий дают регрессионную проверку этих ситуаций. Перенос на другой процесс требует примеров из этого процесса.
+1. **Sources.** Material claims rest on specific records from the task. The author distinguishes a participant's words, an approved decision and a system observation.
+2. **Reasoning.** A colleague can follow the choice of option, the calculation or the test from the answer. The claims agree with the structured fields. The assumptions the result depends on are stated.
+3. **Action.** The recipient understands what they can do based on the answer. If a decision, an estimate or an observation is missing, the specific gap and how to close it are named.
 
-## Пример результата от 25 ноября 2026 года
+If any check fails, mark it and keep the phrase that led to the verdict. For example, the number of shipped units may be calculated correctly, but the phrase “the last event was processed successfully” with no observation behind it fails the manual review. For a repeat run, record the date, the skill and task versions, the model or agent with its exact version, the answers received, and separately the script results and the reviewer's verdicts. The six tasks give a regression check for these situations. Transferring the method to another process needs examples from that process.
 
-В одной отдельной сессии агент Codex получил шесть заданий и тексты трёх скиллов, без ключа и разобранного кейса. Автоматическая проверка засчитала **6 из 6** ответов. Другой ИИ-рецензент проверил ссылки на источники, ход рассуждения и следующее действие. Он засчитал шесть пояснений и отметил двусмысленную запись количества и остатка через дробную черту. Для передачи владельцу продукта понятнее написать «отгружено 10, осталось 0». В сохранённых ответах оставлена исходная формулировка. [Ответы агента](runs/2026-11-25-answers.json)
+## Example result from 25 November 2026
 
-В PLAN-1 агент увидел, что ещё два дня работы над адаптером помещаются в резерв параллельной ветви. В ACC-1 он вычислил остаток после последней отгрузки и отдельно отметил отсутствие наблюдения на проверяемой сборке. Это один прогон фиксированного набора. Оценить пользу скиллов для конкретной команды можно на её собственных примерах и в сравнении с её исходным способом работы.
+In one separate session, a Codex agent received the six tasks **in Russian** and the texts of the three Russian skills, without the key and the worked case. The exact model version was not recorded for this run; future runs should record it. The automated check passed **6 of 6** answers. A second AI reviewer checked the source references, the reasoning and the next action. It passed all six explanations and flagged an ambiguous way of writing quantity and remainder with a slash. For a product owner, “shipped 10, remaining 0” is clearer. The saved answers keep the original wording. [Agent answers](../ru/evals/runs/2026-11-25-answers.json)
+
+In PLAN-1 the agent saw that two extra days of adapter work fit into the float of the parallel branch. In ACC-1 it calculated the remainder after the last shipment and separately noted that there was no observation on the build under test. This is one run of a fixed set. There is no English-language run yet. The value of the skills for a particular team can only be judged on its own examples and against its usual way of working.
 
 ```sh
-python3 evals/run.py grade evals/runs/2026-11-25-answers.json
+python3 evals/run.py --lang ru grade ru/evals/runs/2026-11-25-answers.json
 ```

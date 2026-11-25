@@ -1,89 +1,89 @@
 {
   "formats": {
     "clarify-requirement": {
-      "decision": "open или approved — статус решения о составе показателей портала",
-      "approved_view": "first_shipment (факт первой отгрузки), line_balance (остаток по позициям) или null, если вариант ещё выбирают",
-      "decision_source": "ID записи, в которой уполномоченное лицо утвердило этот вариант, или null",
-      "has_line_quantities": "true или false — подтверждена ли передача количеств по позициям в действующей интеграции",
-      "note": "Покажите аналитику, что известно по источникам, о чём расходятся участники и какой следующий шаг уместен. Укажите ID источников."
+      "decision": "open or approved: status of the decision on which shipment indicators the portal shows",
+      "approved_view": "first_shipment (the fact of the first shipment), line_balance (remaining quantity per line) or null if the option is still being chosen",
+      "decision_source": "ID of the record in which the authorised person approved this option, or null",
+      "has_line_quantities": "true or false: whether the current integration is confirmed to transmit quantities per order line",
+      "note": "Show the analyst what the sources establish, where participants disagree and what the sensible next step is. Cite source IDs."
     },
     "trace-change-impact": {
-      "baseline_days": "длительность утверждённого исходного плана в рабочих днях",
-      "forecast_days": "длительность плана с изменением или null, если её пока нельзя вычислить",
-      "forecast_floor_days": "нижняя граница прогноза по известным длительностям, в рабочих днях. Для полного прогноза совпадает с forecast_days",
-      "effort_delta_pd": "изменение общей трудоёмкости в человеко-днях или null при недостатке данных",
-      "cost_delta_units": "изменение суммы затрат в условных единицах или null при недостатке данных",
-      "committed_days": "длительность действующего утверждённого календарного плана",
-      "note": "Для руководителя проекта разберите зависимости, затронутые результаты работ и основание для решения. Покажите ход расчёта со ссылками на ID и назовите, как закрыть пробел в данных, если он есть."
+      "baseline_days": "duration of the approved baseline schedule in working days",
+      "forecast_days": "duration of the schedule with the change, or null if it cannot be calculated yet",
+      "forecast_floor_days": "lower bound of the forecast from the known durations, in working days. For a complete forecast it equals forecast_days",
+      "effort_delta_pd": "change in total effort in person-days, or null if data is missing",
+      "cost_delta_units": "change in cost in currency units, or null if data is missing",
+      "committed_days": "duration of the schedule currently approved and in force",
+      "note": "For the project manager, walk through the dependencies, the affected deliverables and the basis for the decision. Show the calculation with references to IDs and, if data is missing, say how to close the gap."
     },
     "prepare-acceptance": {
-      "shipped_after": "массив ожидаемых количеств уже отгруженного товара после каждой доставки сообщения, в исходном порядке",
-      "remaining_after": "массив ожидаемых количеств оставшегося товара после каждой доставки сообщения, в исходном порядке",
-      "test_result": "passed, failed или incomplete — технический итог для всего указанного сценария по имеющимся наблюдениям",
-      "product_decision": "accepted, rejected или pending — статус приёмки по записи уполномоченного лица",
-      "decision_source": "ID документа с решением о приёмке или null",
-      "note": "Соберите для владельца продукта проверяемое ожидание, фактическое наблюдение и основание статуса, укажите ID. Если есть расхождение или нет наблюдения, назовите следующий шаг."
+      "shipped_after": "array of expected shipped quantities after each message delivery, in the original order",
+      "remaining_after": "array of expected remaining quantities after each message delivery, in the original order",
+      "test_result": "passed, failed or incomplete: the technical outcome for the whole scenario based on the available observations",
+      "product_decision": "accepted, rejected or pending: acceptance status according to the authorised person's record",
+      "decision_source": "ID of the document with the acceptance decision, or null",
+      "note": "For the product owner, put together the testable expectation, the actual observation and the basis for the status, citing IDs. If there is a discrepancy or a missing observation, name the next step."
     }
   },
   "cases": {
     "REQ-1": {
       "skill": "clarify-requirement",
-      "question": "Подготовьте карточку требования перед встречей по составу первой версии портала.",
+      "question": "Prepare a requirement card before the meeting on the scope of the first portal release.",
       "sources": {
-        "S1": "Матрица полномочий. Состав показателей первой версии утверждает владелец продукта записью в журнале решений.",
-        "S2": "Запись интервью с руководителем продаж. Клиенту хватит сообщения «отгрузка началась».",
-        "S3": "Утреннее сообщение начальника склада. Прошу показывать точное количество оставшегося товара по каждой позиции.",
-        "S4": "Действующий контракт обмена v1. Портал получает номер заказа и признак закрытия, один раз при полном закрытии.",
-        "S5": "Журнал решений по первой версии, полный на дату разбора. Записей о показателях отгрузки нет."
+        "S1": "Authority matrix. The product owner approves the set of indicators for the first release by an entry in the decision log.",
+        "S2": "Interview notes with the head of sales. The customer only needs the message “shipping has started”.",
+        "S3": "Morning message from the warehouse manager. Please show the exact remaining quantity for every order line.",
+        "S4": "Current exchange contract v1. The portal receives the order number and a closed flag, once, when the order is fully closed.",
+        "S5": "Decision log for the first release, complete as of the review date. It has no entries on shipment indicators."
       }
     },
     "REQ-2": {
       "skill": "clarify-requirement",
-      "question": "Актуализируйте карточку требования после совещания. Какой объём должен взять в работу аналитик?",
+      "question": "Update the requirement card after the meeting. What scope should the analyst take into work?",
       "sources": {
-        "M1": "Матрица полномочий. Состав показателей утверждает владелец продукта записью в журнале решений.",
-        "M2": "Действующая версия 2 контракта обмена. Каждое проведённое отправление содержит идентификаторы отправления и позиции заказа, количество и единицу измерения.",
-        "M3": "Журнал решений, подписано владельцем продукта. В релиз включён только факт первой отгрузки на уровне заказа. Остаток по строкам отложен.",
-        "M4": "Более позднее сообщение руководителя продаж. На демонстрации хочу видеть ещё и остаток по каждой строке. Нового решения в журнале нет."
+        "M1": "Authority matrix. The product owner approves the set of indicators by an entry in the decision log.",
+        "M2": "Current version 2 of the exchange contract. Every posted shipment carries the shipment and order line IDs, the quantity and the unit of measure.",
+        "M3": "Decision log, signed by the product owner. The release includes only the fact of the first shipment at order level. Remaining quantity per line is deferred.",
+        "M4": "A later message from the head of sales. At the demo I also want to see the remaining quantity per line. There is no new decision in the log."
       }
     },
     "PLAN-1": {
       "skill": "trace-change-impact",
-      "question": "Оцените влияние предлагаемого изменения на контрольный срок и затраты, подготовьте вывод для согласования.",
+      "question": "Assess the impact of the proposed change on the committed date and cost, and prepare a conclusion for approval.",
       "sources": {
-        "P1": "Базовый календарный план. A — согласовать контракт события, 1 рабочий день. B — адаптер склада, 2 дня после A. C — экран заказа, 5 дней после A. D — сквозная приёмочная проверка, 2 дня после завершения B и C. У каждой работы свой исполнитель на полный день. B и C идут параллельно. Каждый рабочий день исполнителя стоит 100 условных единиц, прочие затраты сохраняются.",
-        "P2": "Оценка команды. Из-за обработки повторной доставки строк отгрузки B займёт 4 дня. Другие длительности, зависимости и исполнители сохраняются.",
-        "P3": "Журнал изменений. Команда запросила анализ влияния, новую базовую версию плана никто не утверждал."
+        "P1": "Baseline schedule. A: agree the event contract, 1 working day. B: warehouse adapter, 2 days after A. C: order screen, 5 days after A. D: end-to-end acceptance test, 2 days after B and C finish. Each activity has its own full-time assignee. B and C run in parallel. Each working day of an assignee costs 100 currency units; other costs are unchanged.",
+        "P2": "Team estimate. Because of handling repeated delivery of shipment lines, B will take 4 days. Other durations, dependencies and assignees are unchanged.",
+        "P3": "Change log. The team requested an impact analysis; nobody has approved a new baseline."
       }
     },
     "PLAN-2": {
       "skill": "trace-change-impact",
-      "question": "Какой срок сейчас можно назвать владельцу продукта и какое обязательство остаётся у команды?",
+      "question": "What date can be given to the product owner now, and what commitment does the team still hold?",
       "sources": {
-        "Q1": "Утверждённый план. A — контракт, 1 рабочий день. После A параллельно выполняются B — адаптер склада, 2 дня, и C — экран заказа, 5 дней. После завершения обоих выполняется D — сквозная проверка, 2 дня. На каждой работе отдельный исполнитель на полный день, ставка 100 условных единиц за человеко-день. Прочие затраты сохраняются.",
-        "Q2": "Вариант с остатком по позициям. C теперь займёт 7 дней. Объём доработки B неизвестен до сверки формата событий со складом, верхней границы оценки нет. A, D и зависимости сохраняются.",
-        "Q3": "Владелец продукта попросил оценить вариант, руководитель проекта сохранил текущий базовый план."
+        "Q1": "Approved schedule. A: contract, 1 working day. After A, B (warehouse adapter, 2 days) and C (order screen, 5 days) run in parallel. When both finish, D (end-to-end test, 2 days) runs. Each activity has a separate full-time assignee; the rate is 100 currency units per person-day. Other costs are unchanged.",
+        "Q2": "Option with remaining quantity per line. C will now take 7 days. The extra work on B is unknown until the event format is reconciled with the warehouse; there is no upper bound on the estimate. A, D and the dependencies are unchanged.",
+        "Q3": "The product owner asked for the option to be estimated; the project manager kept the current baseline."
       }
     },
     "ACC-1": {
       "skill": "prepare-acceptance",
-      "question": "Подготовьте заключение по приёмке. Дайте расчёт ожидаемых значений после каждой доставки, включая повторы.",
+      "question": "Prepare an acceptance conclusion. Give the expected values after each delivery, including repeats.",
       "sources": {
-        "T1": "Требование v2. В заказе одна позиция, заказано 10. Каждое проведённое отправление учитывается один раз по ID. На экране видны накопленное отгруженное количество и остаток.",
-        "T2": "Входы испытания в порядке доставки. Первое сообщение H1 с количеством 6, повтор H1 с количеством 6, затем H2 с количеством 4.",
-        "T3": "Протокол системы, сборка 17. После первого сообщения на экране 6/4 (отгружено/осталось). После повтора — 6/4. Запись и снимок экрана после H2 отсутствуют.",
-        "T4": "Только владелец продукта фиксирует приёмку в реестре. Решения в реестре пока нет. Разработчик написал в чате «должно работать, можно сдавать»."
+        "T1": "Requirement v2. The order has one line, 10 ordered. Each posted shipment is counted once by its ID. The screen shows the cumulative shipped quantity and the remainder.",
+        "T2": "Test inputs in delivery order. First message H1 with quantity 6, a repeat of H1 with quantity 6, then H2 with quantity 4.",
+        "T3": "System log, build 17. After the first message the screen shows 6/4 (shipped/remaining). After the repeat, 6/4. There is no record or screenshot after H2.",
+        "T4": "Only the product owner records acceptance in the register. There is no decision in the register yet. The developer wrote in chat: “should work, ready to ship”."
       }
     },
     "ACC-2": {
       "skill": "prepare-acceptance",
-      "question": "Соберите итог приёмки исправленной сборки. Что подтверждено наблюдением и кто принял результат?",
+      "question": "Summarise acceptance of the fixed build. What is confirmed by observation, and who accepted the result?",
       "sources": {
-        "U1": "Требование v2 для заказа с одной позицией. Заказано 8. Учитывать каждое проведённое отправление один раз по ID, показывать накопленное количество и остаток.",
-        "U2": "Последовательность входов теста. H3 с количеством 3, H4 с количеством 5, затем повтор ранее обработанного H3 с количеством 3.",
-        "U3": "Протокол сборки 21. После первого сообщения экран показал 3/5 (отгружено/осталось), после второго 8/0, после повтора 8/0. Все три наблюдения оформлены для одного заказа и версии.",
-        "U4": "Регламент. Право приёмки принадлежит владельцу продукта.",
-        "U5": "Запись реестра, подписанная владельцем продукта. Поставку сборки 21 по указанному требованию принимаю по результатам протокола U3."
+        "U1": "Requirement v2 for an order with one line. 8 ordered. Count each posted shipment once by ID; show the cumulative quantity and the remainder.",
+        "U2": "Test input sequence. H3 with quantity 3, H4 with quantity 5, then a repeat of the already processed H3 with quantity 3.",
+        "U3": "Log of build 21. After the first message the screen showed 3/5 (shipped/remaining), after the second 8/0, after the repeat 8/0. All three observations are recorded for the same order and build.",
+        "U4": "Procedure. The right to accept belongs to the product owner.",
+        "U5": "Register entry signed by the product owner. I accept delivery of build 21 against the stated requirement based on the log U3."
       }
     }
   }

@@ -1,14 +1,14 @@
 ---
 name: prepare-acceptance
-description: Готовит сценарии приёмки по действующей редакции требования и сопоставляет их с результатами прогона. Применяй для составления проверок или разбора свидетельств перед решением о приёмке.
+description: Prepares acceptance scenarios from the requirement version in force and matches them against test-run results. Use to write checks or to review evidence before an acceptance decision.
 ---
 
-# Подготовить приёмку
+# Prepare acceptance
 
-Найди согласованный результат, условия и исключения для конкретной поставки. Укажи идентификатор и редакцию требования, запись о решении и объект проверки. У спорного правила явно обозначь, кто должен определить ожидаемый исход.
+Find the agreed outcome, conditions and exclusions for the specific delivery. Give the requirement ID and version, the decision record and the object under test. For a disputed rule, state explicitly who has to define the expected outcome.
 
-1. Для каждого критерия задай исходное состояние, данные, действие и наблюдаемый результат. Подбери обычный сценарий и пограничный случай, который отличает корректную реализацию от правдоподобной ошибки. Для частичных отгрузок по строкам показательны две последовательные отгрузки и повторная доставка того же подтверждения. Если правило повтора ещё обсуждается, запиши вопрос и предложи проверку на согласование.
-2. Для сценария по последовательности событий укажи промежуточные состояния. Сопоставь каждый вход со статусом события, строкой и идентификатором операции, когда они определяют исход. Укажи, где именно пользователь или специалист по проверке увидит результат. Проверка данных в учётной системе и проверка отображения в портале дают разные свидетельства.
-3. Если приложены результаты прогона, свяжи каждый с критерием, проверенной сборкой и наблюдением. Отметь подтверждённые критерии, расхождения и пробелы отдельно. Демонстрация первой отгрузки не подтверждает корректность повтора, а один успешный пример не закрывает остальные условия. Отсутствующее наблюдение обозначь как непроверенное. Для материала из другой версии укажи, что позволит обосновать перенос свидетельства или какой сценарий нужно повторить.
+1. For each criterion, set the initial state, the data, the action and the observable result. Pick a normal scenario and an edge case that separates a correct implementation from a plausible mistake. For partial shipments per line, two consecutive shipments and a repeated delivery of the same confirmation are telling. If the repeat rule is still under discussion, record the question and propose a check for approval.
+2. For a scenario driven by a sequence of events, give the intermediate states. Match every input to the event status, the line and the operation ID where they determine the outcome. Say exactly where the user or the tester will see the result. Checking data in the accounting system and checking what the portal displays give different evidence.
+3. If test-run results are attached, link each to a criterion, the build tested and an observation. Mark confirmed criteria, discrepancies and gaps separately. A demo of the first shipment does not confirm that repeats are handled correctly, and one successful example does not cover the other conditions. Mark a missing observation as untested. For material from another build, say what would justify carrying the evidence over, or which scenario must be repeated.
 
-**Результат для приёмки.** Передай специалисту по проверке таблицу «критерий / действие / ожидание / наблюдение и источник / вывод». Без прогона таблица остаётся планом. При наличии пробела назови недостающее свидетельство и ответственного за его получение. Решение уполномоченного владельца о приёмке фиксируй со ссылкой на запись и с указанием объёма, который он принял.
+**Output for acceptance.** Give the tester a table of “criterion / action / expected / observation and source / conclusion”. Without a test run the table remains a plan. If there is a gap, name the missing evidence and who is responsible for obtaining it. Record the authorised owner's acceptance decision with a reference to the record and the scope they accepted.
