@@ -1,7 +1,8 @@
-# Работа с учебной поставкой
+# Working with the training delivery
 
-Все проектные события и числа здесь вымышлены. Для новых примеров создавай самостоятельные исходные данные. Обозначай поставку, редакцию и дату, на которую делаешь вывод. Для факта укажи источник, для предложения — кому предстоит его рассмотреть.
+All project events and numbers here are fictional. For new examples, create self-contained source data. State the delivery, the version and the date your conclusion applies to. Give a source for every fact; for a proposal, say who has to consider it.
 
-- Для разбора требования используй `clarify-requirement`, для оценки изменения — `trace-change-impact`, для подготовки приёмки — `prepare-acceptance`. Инструкции лежат в `.agents/skills/`.
-- Для упражнения с карточками [OKF](okf/index.md) бери только источники, выданные к этому шагу. Согласование поведения, принятие бюджета и приёмку фиксируй по решениям участников с соответствующими полномочиями.
-- При независимом испытании работай в отдельной сессии по выданному заданию и скиллу. Ключ, ранее полученные ответы и полный разбор остаются у рецензента. Порядок для организатора приведён в [инструкции к эвалам](evals/README.md).
+- To analyse a requirement use `clarify-requirement`, to assess a change use `trace-change-impact`, to prepare acceptance use `prepare-acceptance`. The instructions live in `.agents/skills/`.
+- In the exercise with the [OKF](okf/index.md) cards, use only the sources issued for that step. Record agreement on behaviour, acceptance of budget and acceptance of the delivery only from decisions by participants with the corresponding authority.
+- For an independent trial, work in a separate session with only the issued task and skill. The key, earlier answers and the full walkthrough stay with the reviewer. The organiser's procedure is in the [evals guide](evals/README.md).
+- The Russian version of the materials, including the skills, is in [`ru/`](ru/README.md). Use one language consistently within a run.

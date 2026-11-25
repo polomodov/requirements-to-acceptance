@@ -1,0 +1,26 @@
+{
+  "REQ-1": {
+    "expected": {"decision":"open", "approved_view":null, "decision_source":null, "has_line_quantities":false},
+    "review": "Проверьте, что автор различает просьбы S2 и S3, видит ограничение S4 для обоих вариантов и предлагает владельцу продукта принять решение по процедуре S1. Пустой журнал S5 и свежесть S3 сами по себе не определяют состав релиза."
+  },
+  "REQ-2": {
+    "expected": {"decision":"approved", "approved_view":"first_shipment", "decision_source":"M3", "has_line_quantities":true},
+    "review": "В выводе разделены возможности контракта M2 и согласованный объём M3. Предложен способ разобрать более позднюю просьбу M4, не приписывая владельцу её одобрение."
+  },
+  "PLAN-1": {
+    "expected": {"baseline_days":8, "forecast_days":8, "forecast_floor_days":8, "effort_delta_pd":2, "cost_delta_units":200, "committed_days":8},
+    "review": "Показана зависимость A → (B, C) → D. Согласно P1 и P2 ветка B удлиняется с двух до четырёх дней, оставаясь короче пятидневной C. Названы затронутый адаптер, последующая проверка и основание статуса плана P3."
+  },
+  "PLAN-2": {
+    "expected": {"baseline_days":8, "forecast_days":null, "forecast_floor_days":10, "effort_delta_pd":null, "cost_delta_units":null, "committed_days":8},
+    "review": "Десять дней выведены по известной ветке A → C → D как нижняя граница. Указано, как получить оценку B по Q2 и пересчитать максимум параллельных веток. Видно, что Q3 сохраняет утверждённый срок."
+  },
+  "ACC-1": {
+    "expected": {"shipped_after":[6,6,10], "remaining_after":[4,4,0], "test_result":"incomplete", "product_decision":"pending", "decision_source":null},
+    "review": "По T1 и T2 повтор не меняет количество. Автор отделяет расчёт для H2 от фактических наблюдений T3 и предлагает получить недостающее свидетельство. Сообщение разработчика по T4 не служит решением о приёмке."
+  },
+  "ACC-2": {
+    "expected": {"shipped_after":[3,8,8], "remaining_after":[5,0,0], "test_result":"passed", "product_decision":"accepted", "decision_source":"U5"},
+    "review": "Поздний повтор распознан по ID отправления. Протокол U3 подтверждает поведение одной сборки для описанного заказа. Отдельно указаны полномочия U4 и фактическое решение U5."
+  }
+}

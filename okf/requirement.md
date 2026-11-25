@@ -1,6 +1,6 @@
 ---
 type: Requirement
-title: Т-01. Состояние отгрузки и количества по позициям. Редакция 2
+title: R-01. Shipping state and quantities per line. Version 2
 status: stable
 sources:
   - resource: intake.md
@@ -8,17 +8,17 @@ sources:
   - resource: decision.md
 ---
 
-# Т-01. Карточка заказа, редакция 2
+# R-01. Order card, version 2
 
-Владелец продукта согласовал поведение 7 октября 2026 года для поставки с приёмкой 21 октября. Бизнес-аналитик выпустил редакцию после двух подтверждений в Р-01. Учётный статус из редакции 1 сохраняет прежний источник. [Исходная редакция](intake.md) · [Основание изменения](decision.md)
+The product owner approved the behaviour on 7 October 2026 for the delivery with acceptance on 21 October. The business analyst issued this version after both approvals in D-01. The accounting status from version 1 keeps its original source. [Original version](intake.md) · [Basis for the change](decision.md)
 
-| Критерий | Наблюдаемое поведение после обработки данных и обновления карточки |
+| Criterion | Observable behaviour after the data is processed and the card is refreshed |
 |---|---|
-| Т-01.1. Остаток по позиции | По каждой строке показать «Отгружено» — количество отгруженных единиц, и «Осталось» — разницу между заказанным и отгруженным. До первой отгрузки по строке из 10 штук покупатель видит «Отгружено 0, осталось 10». После отгрузки 6 единиц — «Отгружено 6, осталось 4». |
-| Т-01.2. Повтор и несколько строк | В рамках одного склада и заказа учесть каждую проведённую неизменяемую запись по паре «номер отгрузки + строка заказа» один раз. При повторной доставке той же пары количества и состояние сохраняются. Две разные строки одного документа учитываются каждая в своей позиции. |
-| Т-01.3. Состояние отгрузки заказа | До первой отгрузки вывести «Ожидает отгрузки». Если отгружена хотя бы одна единица и по какой-либо позиции есть остаток, вывести «Частично отгружен». Когда каждая позиция отгружена полностью, вывести «Отгружен». |
-| Т-01.4. Учётный статус | Показывать отдельно «Открыт» или «Закрыт» по признаку закрытия заказа в учётной системе. При полной отгрузке и снятом признаке закрытия покупатель одновременно видит «Отгружен» и «Открыт». |
+| R-01.1. Remainder per line | For each line show “Shipped”, the number of units shipped, and “Remaining”, the difference between ordered and shipped. Before the first shipment, on a line for 10 units the customer sees “Shipped 0, remaining 10”. After 6 units ship, “Shipped 6, remaining 4”. |
+| R-01.2. Repeats and multiple lines | Within one warehouse and order, count each posted immutable record once by the “shipment number + order line” pair. When the same pair is delivered again, quantities and state stay the same. Two different lines of one document are each counted against their own order line. |
+| R-01.3. Order shipping state | Before the first shipment show “Awaiting shipment”. If at least one unit has shipped and any line has a remainder, show “Partially shipped”. When every line has shipped in full, show “Shipped”. |
+| R-01.4. Accounting status | Show “Open” or “Closed” separately, based on the order's closed flag in the accounting system. When everything has shipped and the closed flag is not set, the customer sees “Shipped” and “Open” at the same time. |
 
-**Граница поставки.** Один склад, проведённые неизменяемые записи по заказу. Дата следующей машины, возвраты, сторно и отмены вынесены за пределы этой редакции.
+**Delivery boundary.** One warehouse, posted immutable records for the order. The date of the next truck, returns, reversals and cancellations are outside this version.
 
-**Связанные работы.** Пакет 1.1 — сценарий и проверка данных, 1.2 — экран покупателя, 1.3 — сопоставление и учёт строк, 1.4 — проверка и предъявление сборки. Основание для ключа устранения повторов хранится в [О-01](prototype.md).
+**Linked work.** Package 1.1 is the scenario and the data check, 1.2 the customer screen, 1.3 matching and counting of lines, 1.4 testing and presenting the build. The basis for the de-duplication key is kept in [E-01](prototype.md).

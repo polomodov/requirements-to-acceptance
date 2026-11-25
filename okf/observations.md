@@ -1,19 +1,19 @@
 ---
 type: Test record
-title: П-01–П-04. Наблюдения на сборке b17
+title: T-01–T-04. Observations on build b17
 status: stable
 sources:
   - resource: requirement.md
   - resource: decision.md
 ---
 
-# П-01–П-04. Выдержка из журнала проверки
+# T-01–T-04. Extract from the test log
 
-Специалист по тестированию проверил сборку **b17** на интеграционном стенде. Перед каждым наблюдением он дождался обработки сообщения и обновил карточку от имени покупателя. Поля в колонке «Наблюдение» сняты с экрана этой сборки. Ожидания заданы в [Т-01, редакции 2](requirement.md).
+The tester checked build **b17** on the integration test bench. Before each observation the tester waited for the message to be processed and refreshed the card as the customer. The values in the “Observation” column were taken from the screen of this build. The expectations are set in [R-01, version 2](requirement.md).
 
-| Проверка и критерий | Операция на стенде | Наблюдение проверяющего |
+| Check and criterion | Action on the test bench | Tester's observation |
 |---|---|---|
-| П-01 · Т-01.1, Т-01.3 | Открыл заказ Z-17 со строкой L1 на 10 шт. без отгрузок. Затем подал доставку M-11 с проведённой строкой документа SH-41, L1, 6 шт. | Сначала L1 «Отгружено 0, осталось 10», заказ «Ожидает отгрузки». После M-11 — «Отгружено 6, осталось 4», «Частично отгружен». |
-| П-02 · Т-01.2, Т-01.3 | Для того же заказа повторил SH-41/L1 отдельной доставкой M-12. Журнал подтвердил обработку M-11 и M-12. | L1 «Отгружено 6, осталось 4», состояние «Частично отгружен». |
-| П-03 · Т-01.1, Т-01.3, Т-01.4 | Добавил по Z-17 доставку M-13 с новым проведённым документом SH-42, L1, 4 шт. Признак учётного закрытия снят. | L1 «Отгружено 10, осталось 0». На экране одновременно «Отгружен» в состоянии отгрузки и «Открыт» в поле учётного статуса. |
-| П-04 · Т-01.1–Т-01.3 | Открыл отдельный заказ Z-18. В L1 заказано 2 шт., в L2 — 3 шт. Подал один проведённый документ SH-43 со строками L1 на 2 и L2 на 1. | L1 «Отгружено 2, осталось 0», L2 «Отгружено 1, осталось 2». По заказу «Частично отгружен». |
+| T-01 · R-01.1, R-01.3 | Opened order Z-17 with line L1 for 10 units and no shipments. Then sent delivery M-11 with a posted line of document SH-41, L1, 6 units. | First L1 “Shipped 0, remaining 10”, order “Awaiting shipment”. After M-11, “Shipped 6, remaining 4”, “Partially shipped”. |
+| T-02 · R-01.2, R-01.3 | For the same order, repeated SH-41/L1 as a separate delivery M-12. The log confirmed processing of M-11 and M-12. | L1 “Shipped 6, remaining 4”, state “Partially shipped”. |
+| T-03 · R-01.1, R-01.3, R-01.4 | Added delivery M-13 for Z-17 with a new posted document SH-42, L1, 4 units. The accounting closed flag is not set. | L1 “Shipped 10, remaining 0”. The screen shows “Shipped” in the shipping state and “Open” in the accounting status at the same time. |
+| T-04 · R-01.1–R-01.3 | Opened a separate order Z-18. L1 has 2 units ordered, L2 has 3. Sent one posted document SH-43 with lines L1 for 2 and L2 for 1. | L1 “Shipped 2, remaining 0”, L2 “Shipped 1, remaining 2”. Order “Partially shipped”. |
